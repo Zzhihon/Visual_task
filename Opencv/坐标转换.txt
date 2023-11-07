@@ -1,0 +1,73 @@
+import cv2
+import numpy as np
+
+# 创建一个空白图像
+image = np.zeros((600, 600, 3), dtype=np.uint8)
+
+# 定义坐标系原点和旋转角度
+origin = (250, 250)
+angle_degrees = 45  # 旋转角度（逆时针为正方向）
+
+#坐标系A
+length = 500
+angle_radians = np.radians(angle_degrees)
+x_axis = (origin[0] + int(length * np.sin(angle_radians)), origin[1] - int(length * np.cos(angle_radians)))
+y_axis = (origin[0] + int(length * np.cos(angle_radians)), origin[1] + int(length * np.sin(angle_radians)))
+
+cv2.line(image, origin, x_axis, (0, 255, 0), 2)  # lv
+cv2.line(image, origin, y_axis, (0, 255, 0), 2)
+
+#定义并绘制A点的坐标
+point_A = (310, 200)
+cv2.circle(image, (350, 240), 5, (0, 255, 0), -1)
+
+
+
+#B的坐标系
+# 定义坐标系原点和旋转角度
+origin2 = (100, 350)
+# 绘制x轴
+cv2.line(image, (0, origin2[1]), (image.shape[1], origin2[1]), (0, 0, 255), 2)
+# 绘制y轴
+cv2.line(image, (origin2[0], 0), (origin2[0], image.shape[0]), (0, 0, 255), 2)
+
+
+vector1 = np.array([250, 250])  # 向量
+vector2 = np.array([100,350])
+
+def angle(vector1,vector2):
+    # 计算向量的点积
+    dot_product = np.dot(vector1, vector2)
+
+    # 计算向量的模（长度）
+    magnitude1 = np.linalg.norm(vector1)
+    magnitude2 = np.linalg.norm(vector2)
+
+    # 使用反余弦函数计算夹角（弧度）
+    angle_radians = np.arccos(dot_product / (magnitude1 * magnitude2))
+    angle_d = np.degrees(angle_radians)
+    return angle_d
+
+angle_degrees3 = angle(vector1,vector2)
+angle_radians3 = np.radians(angle_degrees3)
+transformation_matrix = np.array([[np.cos(angle_radians3), -np.sin(angle_radians3), -origin[0] + origin2[0]],
+                            [np.sin(angle_radians3), np.cos(angle_radians3), -origin[1] + origin2[1]],
+                                [ 0,0,1]])
+
+print(transformation_matrix)
+
+# 执行仿射变换
+point_homogeneous = np.array([point_A[0], point_A[1], 1])
+transformed_point_homogeneous = np.dot(transformation_matrix, point_homogeneous)
+
+# 从齐次坐标中提取新的点坐标
+transformed_point = (int(transformed_point_homogeneous[0]), int(transformed_point_homogeneous[1]))
+print(transformed_point)
+
+#绘制B点坐标
+cv2.circle(image, transformed_point, 5, (0, 0, 255), -1)
+
+# 显示图像
+cv2.imshow('Skewed Coordinate System', image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
