@@ -1,0 +1,12 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+    string a;
+    cin>>a;
+    int b = a.size();
+    for(int i =b-1; i >=0; i --)
+    {
+        cout<<a[i];
+    }
+}

@@ -1,0 +1,48 @@
+#include <iostream>
+
+bool ok(int k) {
+    int a[10], i = 0;
+    while (k > 0) {
+        a[i] = k % 10;
+        k /= 10;
+        i++;
+    }
+    for (int j = 0; j < i; j++)
+        if (a[j] != a[i - j - 1])
+            return false;
+    return true;
+}
+
+bool ws(int k) {
+    if (k >= 10 && k < 100 && k != 11 || k >= 1000 && k < 10000)
+        return false;
+    if (k >= 100000 && k < 1000000 || k >= 10000000 && k < 100000000)
+        return false;
+    return true;
+}
+
+bool ss(int k) {
+    if (k < 2)
+        return false;
+    for (int i = 2; i * i <= k; i++)
+        if (k % i == 0)
+            return false;
+    return true;
+}
+
+int main() {
+    int a, b;
+    std::cin >> a >> b;
+
+    if (a > b) {
+        std::swap(a, b); 
+    }
+
+    for (int num = a; num <= b; num++) {
+        if (ok(num) && ws(num) && ss(num)) {
+            std::cout << num << std::endl;
+        }
+    }
+
+    return 0;
+}

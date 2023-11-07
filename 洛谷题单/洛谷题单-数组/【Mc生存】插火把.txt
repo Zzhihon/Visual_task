@@ -1,0 +1,61 @@
+#include<iostream>
+using namespace std;
+
+void can(int a[101][101], int x, int y)
+{
+    for(int i =x+2; i >= x-2; i --)
+    {   
+        if( i == 0) break;
+        else a[i][y] = 1;
+    }   
+    
+    for(int i =y+2; i >= y-2; i --)
+    {    
+        if( i == 0) break;
+        else a[x][i] = 1;
+    }
+    if( x-1 != 0&&y-1 != 0 ) a[x-1][y-1] = 1;
+    if( x-1 != 0&&y+1 != 0 ) a[x-1][y+1] = 1;
+    if( x+1 != 0&&y+1 != 0 ) a[x+1][y+1] = 1;
+    if( x+1 != 0&&y-1 != 0 ) a[x+1][y-1] = 1;
+}
+void plu(int a[101][101], int x, int y)
+{
+    for(int i = x+2; i >= x-2; i -- )
+    {
+        if( i == 0) break;
+        else
+        {   
+            for(int j = y+2; j >= y-2; j -- )
+            {    
+                if( i == 0) break;
+                else a[i][j] = 1;
+            }
+        }
+    }
+}
+
+int main()
+{
+    int n,h,y,x1,y1,x2,y2, sum =0;
+    int a[101][101];
+    cin>>n>>h>>y;
+    for(int r = 1; r <= n; r ++)
+        for(int c =1; c <= n; c ++)
+            a[r][c] = 0;
+    for(int i =1; i <=h; i ++)
+    {
+        cin>>x1>>y1;
+        can(a,x1,y1);
+    }
+    for(int i =1; i <=y; i ++)
+    {
+        cin>>x2>>y2;
+        plu(a,x2,y2);
+    }
+    for(int r = 1; r <= n; r ++)
+        for(int c =1; c <= n; c ++)
+            if(a[r][c] == 0)
+                sum ++;
+    cout<<sum;
+}

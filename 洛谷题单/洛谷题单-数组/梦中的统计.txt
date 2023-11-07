@@ -1,0 +1,29 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+    int sum = 0, n[10];
+    int a,b, c=1, d=0;
+    cin>>a>>b;
+    for(int i =0; i<10; i ++) n[i]=0;
+    for(int i = a; i <= b; i ++)
+    {   
+        c = i;
+        while(c != 0)
+        {   
+            d = c % 10;
+            if(d == 0) n[0]++;
+            if(d == 1) n[1]++;
+            if(d == 2) n[2]++;
+            if(d == 3) n[3]++;
+            if(d == 4) n[4]++;
+            if(d == 5) n[5]++;
+            if(d == 6) n[6]++;
+            if(d == 7) n[7]++;
+            if(d == 8) n[8]++;
+            if(d == 9) n[9]++;
+            c= c/10;
+        }
+    }
+    for(int i =0; i<10; i ++) cout<<n[i]<<' ';
+}

@@ -1,0 +1,16 @@
+#include<iostream>
+using namespace std;
+int main()
+{   
+    int nums[10];
+    int a,b, sum =0;
+    for(int i = 0; i <10; i ++) cin>>nums[i];
+    cin>>a;
+    b = a+30;
+    for(int i =0; i<10; i++)
+    {
+        if(b >= nums[i]) sum++;
+    }
+    cout<<sum;
+
+}

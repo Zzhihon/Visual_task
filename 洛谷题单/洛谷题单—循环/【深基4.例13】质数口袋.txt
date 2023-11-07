@@ -1,0 +1,37 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+int p[1000005];
+void sif()
+{
+    for(int i = 2; i <= 100000; i ++) p[i] = 1;
+    for(int i = 2; i <= 100000; i ++)
+        if (p[i] == 1 )
+            for(int j = i*2; j < 100000; j = j+i)     
+                p[j] = 0;
+            
+}
+
+int main()
+{   
+    int max;
+    cin>>max;
+    int sum = 0;
+    
+    sif();
+    for(int i = 2; i <= max; i ++)
+    {
+        if(p[i] == 1)
+        {   
+            ++sum;
+            cout<<i<<endl;
+            max = max - i;
+        }
+        if (max < 0)
+        {
+            break;
+        }
+        
+    }
+    cout<<sum<<endl;
+}

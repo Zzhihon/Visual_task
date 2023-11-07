@@ -1,0 +1,19 @@
+#include<iostream>
+
+using namespace std;
+int main()
+{
+    int n, a =0;
+    cin>>n;
+    for(int i = 100; i > 0; i --)
+    {  
+        for(int j = 1; j < 101; j ++)
+            if( (7 * i + 21 * j) * 52 == n ) 
+            {                  
+                cout<<i<<endl<<j<<endl;
+                a = 1;
+                break;
+            }
+        if( a == 1) break;
+    }
+}

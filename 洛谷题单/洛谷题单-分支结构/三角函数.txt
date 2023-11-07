@@ -1,0 +1,10 @@
+#includebitsstdc++.h
+using namespace std;
+int main()
+{
+    int n[3];
+    for(int i = 0; i  3; i ++) cinn[i];
+    sort(n,n+3);
+    coutn[0]__gcd(n[0],n[2])''n[2]__gcd(n[0],n[2]);
+    
+}

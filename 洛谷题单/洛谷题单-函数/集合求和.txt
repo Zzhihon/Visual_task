@@ -1,0 +1,16 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{   
+    int a;
+    int n = 0,sum = 0;
+    long long s;
+    while(cin>>a)
+    {
+        sum += a;
+        n++;
+    }
+    s = sum * pow(2,n-1);
+    cout<<s;
+}
